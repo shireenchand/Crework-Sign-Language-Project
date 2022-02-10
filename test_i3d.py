@@ -111,6 +111,7 @@ def run(mode='rgb',
         # predictions[0] --> num_classes tensor
         # lowest as the first element - highest as the last element
         out_labels = np.argsort(predictions.cpu().detach().numpy()[0])
+        print(out_labels[-1])
         out_probs = np.sort(predictions.cpu().detach().numpy()[0])
 
         lbl = labels[0][0].item()
