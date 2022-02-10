@@ -147,16 +147,18 @@ def make_dataset(split_file, split, root, mode, num_classes):
         
         # Get label
         label = int(data[vid]['action'][0])
+        dataset.append((vid, label, 0, data[vid]['action'][1], data[vid]['action'][2] - data[vid]['action'][1]))
         
-        if len(vid) == 5:
-            ## We have tuples where we know the ID of the video,
-            ## the label for each frame... not sure what src is doing but
-            ## we can ignore
-            ## 4th element is the frame where the action starts
-            ## 5th element is how many frames this action lasts
-            dataset.append((vid, label, 0, data[vid]['action'][2] - data[vid]['action'][1]))
-        elif len(vid) == 6:  ## sign kws instances ---> This doesn't run in the training set
-            dataset.append((vid, label, 0, data[vid]['action'][1], data[vid]['action'][2] - data[vid]['action'][1]))
+#         if len(vid) == 5:
+#             ## We have tuples where we know the ID of the video,
+#             ## the label for each frame... not sure what src is doing but
+#             ## we can ignore
+#             ## 4th element is the frame where the action starts
+#             ## 5th element is how many frames this action lasts
+#             dataset.append((vid, label, 0, data[vid]['action'][2] - data[vid]['action'][1]))
+#         elif len(vid) == 6:  ## sign kws instances ---> This doesn't run in the training set
+#             dataset.append((vid, label, 0, data[vid]['action'][1], data[vid]['action'][2] - data[vid]['action'][1]))
+
 
     print("Skipped videos: ", count_skipping)
     print("Total number of videos in the dataset: ", len(dataset))
