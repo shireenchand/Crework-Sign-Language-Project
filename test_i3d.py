@@ -1,6 +1,7 @@
 import math
 import os
 import argparse
+import pickle
 
 import matplotlib.pyplot as plt
 
@@ -58,6 +59,9 @@ def run(mode='rgb',
         datasets=None,
         weights=None,
         num_classes=2000):
+    with open("/content/Crework-Sign-Language-Project/predictions.txt","w") as f:
+        f.write('')
+    f.close()
     # setup dataset
     test_transforms = transforms.Compose([videotransforms.CenterCrop(224)])
 
@@ -112,6 +116,10 @@ def run(mode='rgb',
         # lowest as the first element - highest as the last element
         out_labels = np.argsort(predictions.cpu().detach().numpy()[0])
         print(out_labels[-1])
+        with open('/content/Crework-Sign-Language-Project/predictions.txt','a') as f:
+            f.write(str(out_labels[-1]))
+            f.write('\n')
+        f.close()
         out_probs = np.sort(predictions.cpu().detach().numpy()[0])
 
         lbl = labels[0][0].item()
