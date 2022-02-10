@@ -147,7 +147,7 @@ def make_dataset(split_file, split, root, mode, num_classes):
         
         # Get label
         label = int(data[vid]['action'][0])
-        dataset.append((vid, label, 0, data[vid]['action'][1], data[vid]['action'][2] - data[vid]['action'][1]))
+        dataset.append((vid, label, 0, data[vid]['action'][2] - data[vid]['action'][1]))
         
 #         if len(vid) == 5:
 #             ## We have tuples where we know the ID of the video,
