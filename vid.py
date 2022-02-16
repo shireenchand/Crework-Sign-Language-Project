@@ -74,8 +74,8 @@ def split_by_manifest(filename, manifest, vcodec="copy", acodec="copy",
                 raise SystemExit
 
 
-def get_video_length(filename):
-    output = subprocess.check_output(("ffprobe", "-v", "error", "-show_entries", "format=duration", "-of",
+def get_video_length(filename,vcodec):
+    output = subprocess.check_output(("ffprobe", vcodec, "error", "format=duration",
                                       "default=noprint_wrappers=1:nokey=1", filename)).strip()
     video_length = int(float(output))
     print("Video length in seconds: " + str(video_length))
@@ -94,7 +94,7 @@ def split_by_seconds(filename, split_length, vcodec="copy", acodec="copy",
         raise SystemExit
 
     if not video_length:
-        video_length = get_video_length(filename)
+        video_length = get_video_length(filename,)
     split_count = ceildiv(video_length, split_length)
     if split_count == 1:
         print("Video length is less then the target split length.")
